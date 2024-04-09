@@ -3,4 +3,6 @@
     <string name="main_share">Share our Apps</string>
     <string name="main_rate">Find us in store</string>
     <string name="google_play_link">https://play.google.com/store/apps/details?id=</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_count">+6</string>
 </resources>

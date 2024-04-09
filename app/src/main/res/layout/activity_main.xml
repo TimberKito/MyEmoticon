@@ -22,8 +22,8 @@
                 android:id="@+id/bt_menu"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="7dp"
-                android:padding="8dp"
+                android:layout_marginStart="4dp"
+                android:padding="10dp"
                 android:src="@drawable/svg_menu"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,21 +44,20 @@
             <!--tab-->
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_title"
-                app:tabIndicatorColor="@color/theme_color"
-                app:tabIndicatorFullWidth="false"
-                app:tabMode="scrollable" />
+                app:tabIndicatorColor="@color/main_color"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/main_color" />
 
             <!--内容-->
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tabLayout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -76,6 +75,7 @@
                 android:id="@+id/topPanel"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
+                android:background="@color/main_bg_color"
                 android:paddingBottom="14dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent">

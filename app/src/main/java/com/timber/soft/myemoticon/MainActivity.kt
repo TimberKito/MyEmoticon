@@ -4,15 +4,22 @@ import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentPagerAdapter
+import com.google.android.material.tabs.TabLayout
 import com.timber.soft.myemoticon.databinding.ActivityMainBinding
 import com.timber.soft.myemoticon.model.RootDataModel
 import com.timber.soft.myemoticon.tools.AppTools
@@ -76,16 +83,57 @@ class MainActivity : AppCompatActivity() {
             AppTools.parseJsonFile(assets.open("data.json"))
         )
         rootModelList.shuffle()
+
         for (i in rootModelList) {
             binding.tabLayout.addTab(
-                binding.tabLayout.newTab().setCustomView(R.layout.item_custom_tab)
+                binding.tabLayout.newTab()
             )
         }
 
+        for (i in 0 until binding.tabLayout.tabCount) {
+            val rootDataModel = rootModelList[i]
+            fragmentList.add(MainViewPagerFragment(rootDataModel))
+        }
 
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(p0: TabLayout.Tab?) {
+                val textView = TextView(this@MainActivity)
+                val selectedSize = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_PX, 24f, resources.displayMetrics
+                )
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, selectedSize)
+                textView.typeface = Typeface.defaultFromStyle(Typeface.BOLD) //加粗
+                textView.setTextColor(ContextCompat.getColor(this@MainActivity, R.color.main_color))
+                textView.text = p0!!.text
+                p0.customView = textView
+            }
 
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+                p0?.customView = null
+            }
+
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+            }
+        })
+
+        binding.viewpager.offscreenPageLimit = 3
+        binding.viewpager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
+            override fun getCount(): Int {
+                return fragmentList.size
+            }
+
+            override fun getItem(position: Int): Fragment {
+                return fragmentList[position]
+            }
+
+            override fun getPageTitle(position: Int): CharSequence {
+                return rootModelList[position].categoryName
+            }
+        }
+        binding.tabLayout.setupWithViewPager(binding.viewpager)
 
     }
+
     private fun getVersionName(): String {
         val pInfo: PackageInfo
         try {
