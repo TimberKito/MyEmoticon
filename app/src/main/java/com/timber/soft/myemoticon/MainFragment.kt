@@ -1,6 +1,7 @@
 package com.timber.soft.myemoticon
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,16 +11,17 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.timber.soft.myemoticon.model.ChildDataModel
 import com.timber.soft.myemoticon.model.RootDataModel
+import com.timber.soft.myemoticon.tools.AppVal
 
 class MainViewPagerFragment(private val rootModel: RootDataModel) : Fragment() {
     override fun onCreateView(
@@ -28,20 +30,26 @@ class MainViewPagerFragment(private val rootModel: RootDataModel) : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         val recyclerViewList: RecyclerView = view.findViewById(R.id.recycler_list)
         recyclerViewList.layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-        val pagerAdapter = MainHomeCardAdapter(requireContext(),
+        val pagerAdapter = MainHomeCardAdapter(
+            requireContext(),
             rootModel,
-            object : OnItemClickListener {
-                override fun onItemClick(position: Int, childModel: ChildDataModel) {
-//                    val intent = Intent(requireContext(), DetailsActivity::class.java)
-//                    intent.putExtra("KEY_EXTRA", dataModel)
-//                    startActivity(intent)
-                    Log.d("onClick", "item has been click!")
-                }
-            })
+            OnItemClickListenerImpl(requireContext())
+            )
 
         recyclerViewList.adapter = pagerAdapter
         return view
     }
+
+}
+
+class OnItemClickListenerImpl(private val mcontext: Context) : OnItemClickListener {
+    override fun onItemClick(position: Int, childModel: ChildDataModel) {
+        val intent = Intent(mcontext, SetDetailsActivity::class.java)
+        intent.putExtra(AppVal.KEY_EXTRA, childModel)
+        startActivity(mcontext, intent, null)
+        Log.d("onClick", "item has been click!")
+    }
+
 }
 
 interface OnItemClickListener {
@@ -77,7 +85,7 @@ class MainHomeCardAdapter(
 
         holder.recyclerPreview.layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
 
-        val customList  = mutableListOf<String>()
+        val customList = mutableListOf<String>()
         customList.addAll(childModel.previewList)
         customList.add("xxx")
 
@@ -86,14 +94,8 @@ class MainHomeCardAdapter(
             customList,
             childModel.count,
             childModel,
-            object : OnItemClickListener {
-                override fun onItemClick(position: Int, childModel: ChildDataModel) {
-//                    val intent = Intent(requireContext(), DetailsActivity::class.java)
-//                    intent.putExtra("KEY_EXTRA", dataModel)
-//                    startActivity(intent)
-                    Log.d("onClick", "item has been click!")
-                }
-            })
+            OnItemClickListenerImpl(context)
+            )
 
         holder.recyclerPreview.adapter = cardImgAdapter
 
@@ -126,20 +128,20 @@ class CardImgAdapter(
         return urlList.size
     }
 
-
     override fun onBindViewHolder(holder: ImgViewHolder, position: Int) {
         val preUrl: String = urlList[position]
-        try {
-            Glide.with(context).load(preUrl)
-                // 淡入动画
-                .transition(DrawableTransitionOptions.withCrossFade())
-                // 加载失败占位图
-                .into(holder.preCardImg)
-        } catch (e: Exception) {
-            e.printStackTrace()
+
+        if (preUrl != "xxx"){
+            try {
+                Glide.with(context).load(preUrl)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(holder.preCardImg)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
-        if (position == urlList.size-1) {
+        if (position == urlList.size - 1) {
             holder.preCardCount.visibility = View.VISIBLE
             holder.preCardCount.text = "+" + imgCount
         } else {
