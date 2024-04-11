@@ -30,7 +30,7 @@
 
         <provider
             android:name=".StickerProvider"
-            android:authorities="com.timber.soft.myemoticon.StickerProvider"
+            android:authorities="com.stickify.stickers.app.test.StickerProvider"
             android:enabled="true"
             android:exported="true"
             android:readPermission="com.whatsapp.sticker.READ" />
