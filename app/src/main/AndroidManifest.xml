@@ -8,9 +8,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyEmoticon"
         tools:targetApi="31">
@@ -30,7 +30,7 @@
 
         <provider
             android:name=".StickerProvider"
-            android:authorities="com.stickify.stickers.app.test.StickerProvider"
+            android:authorities="com.stickify.stickers.app.StickerProvider"
             android:enabled="true"
             android:exported="true"
             android:readPermission="com.whatsapp.sticker.READ" />

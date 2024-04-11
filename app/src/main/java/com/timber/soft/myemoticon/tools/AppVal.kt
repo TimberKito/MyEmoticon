@@ -1,7 +1,7 @@
 package com.timber.soft.myemoticon.tools
 
 object AppVal {
-    const val AUTHOR = "com.stickify.stickers.app.test.StickerProvider"
+    const val AUTHOR = "com.stickify.stickers.app.StickerProvider"
     const val STICKER_ACTION = "com.whatsapp.intent.action.ENABLE_STICKER_PACK"
     const val KEY_PACK_ID = "sticker_pack_id"
     const val KEY_PACK_AUTHORITY = "sticker_pack_authority"

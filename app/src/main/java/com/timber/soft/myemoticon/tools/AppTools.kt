@@ -38,10 +38,13 @@ object AppTools {
     fun dpCovertPx(context: Context): Int {
         // 获取当前设备的屏幕密度，并赋值给变量 scale
         var result = 0
+        // 获取状态栏高度的资源ID，赋值给变量 resourceId
         val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
+        // 如果资源ID大于0，则获取状态栏的高度并赋值给变量 result
         if (resourceId > 0) {
             result = context.resources.getDimensionPixelSize(resourceId)
         }
+        // 返回结果
         return result
     }
 

@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
+import android.view.Window
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         binding.btMenu.setOnClickListener() {
             binding.drawerRoot.openDrawer(GravityCompat.START)
         }
-
+        
         binding.drawerRoot.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
             }

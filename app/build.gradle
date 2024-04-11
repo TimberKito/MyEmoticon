@@ -7,17 +7,17 @@ android {
     namespace 'com.timber.soft.myemoticon'
     compileSdk 34
 
-    signingConfigs {
-        debug {
-            storeFile file('D:\\Android_Files\\MyEmoticon\\info\\key_emoticon_test.jks')
-            storePassword 'key123'
-            keyPassword 'key123'
-            keyAlias 'key_emoticon'
-        }
-    }
+//    signingConfigs {
+//        debug {
+//            storeFile file('D:\\Android_Files\\MyEmoticon\\info\\key_emoticon_test.jks')
+//            storePassword 'key123'
+//            keyPassword 'key123'
+//            keyAlias 'key_emoticon'
+//        }
+//    }
 
     defaultConfig {
-        applicationId "com.stickify.stickers.app.test"
+        applicationId "com.stickify.stickers.app"
         minSdk 22
         targetSdk 34
         versionCode 1
@@ -63,6 +63,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
-
 
 }
