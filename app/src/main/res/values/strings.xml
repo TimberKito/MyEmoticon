@@ -6,4 +6,6 @@
     <string name="item_name">Item Name</string>
     <string name="item_count">+66</string>
     <string name="set_to_whatsapp">SET TO WHATSAPP</string>
+    <string name="type_sticker">vnd.android.cursor.dir/vnd.%1$s.%2$s</string>
+    <string name="whatsapp_link">https://play.google.com/store/apps/details?id=com.whatsapp</string>
 </resources>

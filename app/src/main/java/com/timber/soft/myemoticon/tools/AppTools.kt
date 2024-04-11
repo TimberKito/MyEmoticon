@@ -8,13 +8,32 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.gson.Gson
 import com.timber.soft.myemoticon.model.RootDataModel
+import java.io.BufferedReader
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.io.StringWriter
 import java.util.zip.ZipFile
 
 object AppTools {
+
+    fun fileToString(fileInputStream: InputStream): String {
+        return try {
+            val charArray = CharArray(fileInputStream.available())
+            var readCount = 0
+            val streamReader = InputStreamReader(fileInputStream)
+            val bufferedReader = BufferedReader(streamReader)
+            val stringWriter = StringWriter()
+            while (bufferedReader.read(charArray).also { readCount = it } != -1) {
+                stringWriter.write(charArray, 0, readCount)
+            }
+            stringWriter.toString()
+        } catch (exception: IOException) {
+            ""
+        }
+    }
 
     fun dpCovertPx(context: Context): Int {
         // 获取当前设备的屏幕密度，并赋值给变量 scale

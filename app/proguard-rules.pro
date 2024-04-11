@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep class com.timber.soft.myemoticon.model.**{ *; }
+-keep class com.google.gson.** { *; }
+-keepattributes Signature
+-keep class com.google.gson.reflect.TypeToken { *; }
+-keep class * extends com.google.gson.reflect.TypeToken
+-keepattributes AnnotationDefault,RuntimeVisibleAnnotations

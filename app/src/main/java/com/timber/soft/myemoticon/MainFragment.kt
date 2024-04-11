@@ -34,7 +34,7 @@ class MainViewPagerFragment(private val rootModel: RootDataModel) : Fragment() {
             requireContext(),
             rootModel,
             OnItemClickListenerImpl(requireContext())
-            )
+        )
 
         recyclerViewList.adapter = pagerAdapter
         return view
@@ -95,7 +95,7 @@ class MainHomeCardAdapter(
             childModel.count,
             childModel,
             OnItemClickListenerImpl(context)
-            )
+        )
 
         holder.recyclerPreview.adapter = cardImgAdapter
 
@@ -131,10 +131,11 @@ class CardImgAdapter(
     override fun onBindViewHolder(holder: ImgViewHolder, position: Int) {
         val preUrl: String = urlList[position]
 
-        if (preUrl != "xxx"){
+        if (preUrl != "xxx") {
             try {
                 Glide.with(context).load(preUrl)
                     .transition(DrawableTransitionOptions.withCrossFade())
+                    .error(R.drawable.svg_img_error)
                     .into(holder.preCardImg)
             } catch (e: Exception) {
                 e.printStackTrace()

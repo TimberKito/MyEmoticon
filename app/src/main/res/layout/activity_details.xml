@@ -28,8 +28,7 @@
             android:layout_centerInParent="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="9dp"
-            android:layout_toEndOf="@+id/back_bt"
-            android:src="@mipmap/ic_launcher_round" />
+            android:layout_toEndOf="@+id/back_bt" />
 
         <TextView
             android:id="@+id/emo_title"
